@@ -8,21 +8,21 @@ require 'haml'
 task :default => [:compile]
 
 task :compile do
-   FileList.new('./src/*.html.haml').each do |filename|
-     if filename =~ /([^\/]+)\.haml$/
-       File.open($1, 'w') do |f|
-         f.write Haml::Engine.new(File.read(filename)).render
-       end
-     end
-   end
+  FileList.new('./src/*.html.haml').each do |filename|
+    if filename =~ /([^\/]+)\.haml$/
+      File.open($1, 'w') do |f|
+        f.write Haml::Engine.new(File.read(filename)).render
+      end
+    end
+  end
 end
 
 task :clean do
-   `rm -rf *.html`
+  `rm -rf *.html`
 end
 
 task :test do 
-	Rake::TestTask.new do |t|
-	   t.test_files = FileList['test/jenkins_sample_test.rb']
-	end
+  Rake::TestTask.new do |t|
+    t.test_files = FileList['test/jenkins_sample_test.rb']
+  end
 end
